@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jeopardy Game</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .board { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; max-width: 800px; margin: auto; }
+        .tile { width: 150px; height: 100px; background: blue; color: white; font-size: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 10px; }
+        .flipped { background: white; color: black; border: 2px solid black; }
+    </style>
+</head>
+<body>
+    <h1>Jeopardy Game</h1>
+    <div class="board">
+        <div class="tile" onclick="flipTile(this, 'What is the Bible?')">$100</div>
+        <div class="tile" onclick="flipTile(this, 'Who was Moses?')">$200</div>
+        <div class="tile" onclick="flipTile(this, 'What is Genesis?')">$300</div>
+        <div class="tile" onclick="flipTile(this, 'Who is Jesus?')">$400</div>
+        <div class="tile" onclick="flipTile(this, 'What is the Resurrection?')">$500</div>
+    </div>
+    <script>
+        function flipTile(tile, answer) {
+            tile.textContent = answer;
+            tile.classList.add('flipped');
+            tile.style.pointerEvents = 'none'; // Prevent clicking again
+        }
+    </script>
+</body>
+</html>
