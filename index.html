@@ -7,8 +7,10 @@
         .board-container { max-width: 750px; margin: auto; }
         .board { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
         .category { font-size: 20px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; cursor: pointer; }
-        .tile { width: 140px; height: 100px; background: #0000FF; color: yellow; font-size: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold; border: 2px solid white; border-radius: 5px; }
+        .tile { width: 140px; height: 100px; background: #0000FF; color: yellow; font-size: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold; border: 2px solid white; border-radius: 5px; flex-direction: column; padding: 10px; box-sizing: border-box; }
         .tile:hover { background: #3333FF; }
+        .tile input { width: 100%; margin-bottom: 5px; text-align: center; font-size: 16px; background-color: #0000FF; color: yellow; border: none; border-bottom: 1px solid white; }
+        .tile input:focus { outline: none; }
         .question-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; color: white; display: flex; align-items: center; justify-content: center; font-size: 36px; text-align: center; }
         .close-btn { position: absolute; top: 20px; right: 20px; background: red; color: white; padding: 10px; cursor: pointer; font-size: 20px; border: none; }
         .answer-btn { margin-top: 20px; background: green; color: white; padding: 10px; cursor: pointer; border: none; }
@@ -18,46 +20,59 @@
     <h1>Jeopardy Game</h1>
     <div id="setup-section">
         <h2>Enter All Questions and Answers</h2>
-        <form id="questionForm">
-            <textarea id="questionsInput" rows="10" cols="50" placeholder="Enter questions and answers, separated by a new line (e.g., 'Question - Answer')"></textarea><br>
-            <button type="button" onclick="saveGame()">Save Game</button>
-        </form>
-    </div>
-    <div class="board-container" id="boardSection" style="display:none;">
-        <div class="board" id="gameBoard">
-            <div class="category" contenteditable="true">Bible Basics</div>
-            <div class="category" contenteditable="true">Old Testament</div>
-            <div class="category" contenteditable="true">New Testament</div>
-            <div class="category" contenteditable="true">Faith & Beliefs</div>
-            <div class="category" contenteditable="true">End Times</div>
+        <div class="board-container" id="boardSection">
+            <div class="board" id="gameBoard">
+                <div class="category">Bible Basics</div>
+                <div class="category">Old Testament</div>
+                <div class="category">New Testament</div>
+                <div class="category">Faith & Beliefs</div>
+                <div class="category">End Times</div>
+            </div>
+            <div class="board">
+                <div class="tile">
+                    <input type="text" placeholder="Enter Question" class="question-input">
+                    <input type="text" placeholder="Enter Answer" class="answer-input">
+                </div>
+                <div class="tile">
+                    <input type="text" placeholder="Enter Question" class="question-input">
+                    <input type="text" placeholder="Enter Answer" class="answer-input">
+                </div>
+                <div class="tile">
+                    <input type="text" placeholder="Enter Question" class="question-input">
+                    <input type="text" placeholder="Enter Answer" class="answer-input">
+                </div>
+                <div class="tile">
+                    <input type="text" placeholder="Enter Question" class="question-input">
+                    <input type="text" placeholder="Enter Answer" class="answer-input">
+                </div>
+                <div class="tile">
+                    <input type="text" placeholder="Enter Question" class="question-input">
+                    <input type="text" placeholder="Enter Answer" class="answer-input">
+                </div>
+                <!-- Repeat this block for all tiles in the grid -->
+                <div class="tile">
+                    <input type="text" placeholder="Enter Question" class="question-input">
+                    <input type="text" placeholder="Enter Answer" class="answer-input">
+                </div>
+                <div class="tile">
+                    <input type="text" placeholder="Enter Question" class="question-input">
+                    <input type="text" placeholder="Enter Answer" class="answer-input">
+                </div>
+                <div class="tile">
+                    <input type="text" placeholder="Enter Question" class="question-input">
+                    <input type="text" placeholder="Enter Answer" class="answer-input">
+                </div>
+                <div class="tile">
+                    <input type="text" placeholder="Enter Question" class="question-input">
+                    <input type="text" placeholder="Enter Answer" class="answer-input">
+                </div>
+                <div class="tile">
+                    <input type="text" placeholder="Enter Question" class="question-input">
+                    <input type="text" placeholder="Enter Answer" class="answer-input">
+                </div>
+            </div>
         </div>
-        <div class="board">
-            <div class="tile" onclick="revealQuestion(this)">$100</div>
-            <div class="tile" onclick="revealQuestion(this)">$200</div>
-            <div class="tile" onclick="revealQuestion(this)">$300</div>
-            <div class="tile" onclick="revealQuestion(this)">$400</div>
-            <div class="tile" onclick="revealQuestion(this)">$500</div>
-            <div class="tile" onclick="revealQuestion(this)">$100</div>
-            <div class="tile" onclick="revealQuestion(this)">$200</div>
-            <div class="tile" onclick="revealQuestion(this)">$300</div>
-            <div class="tile" onclick="revealQuestion(this)">$400</div>
-            <div class="tile" onclick="revealQuestion(this)">$500</div>
-            <div class="tile" onclick="revealQuestion(this)">$100</div>
-            <div class="tile" onclick="revealQuestion(this)">$200</div>
-            <div class="tile" onclick="revealQuestion(this)">$300</div>
-            <div class="tile" onclick="revealQuestion(this)">$400</div>
-            <div class="tile" onclick="revealQuestion(this)">$500</div>
-            <div class="tile" onclick="revealQuestion(this)">$100</div>
-            <div class="tile" onclick="revealQuestion(this)">$200</div>
-            <div class="tile" onclick="revealQuestion(this)">$300</div>
-            <div class="tile" onclick="revealQuestion(this)">$400</div>
-            <div class="tile" onclick="revealQuestion(this)">$500</div>
-            <div class="tile" onclick="revealQuestion(this)">$100</div>
-            <div class="tile" onclick="revealQuestion(this)">$200</div>
-            <div class="tile" onclick="revealQuestion(this)">$300</div>
-            <div class="tile" onclick="revealQuestion(this)">$400</div>
-            <div class="tile" onclick="revealQuestion(this)">$500</div>
-        </div>
+        <button type="button" onclick="saveGame()">Save Game</button>
     </div>
 
     <div class="question-screen" id="questionScreen">
@@ -68,54 +83,57 @@
     </div>
 
     <script>
-        let gameData = {};
+        let gameData = [];
         let currentTile = null;
 
         function saveGame() {
-            const inputText = document.getElementById("questionsInput").value.trim();
-            if (!inputText) {
-                alert("Please enter questions and answers.");
-                return;
+            const gameBoard = document.getElementById("gameBoard");
+            const tiles = gameBoard.getElementsByClassName("tile");
+
+            // Clear the previous game data
+            gameData = [];
+
+            for (let i = 0; i < tiles.length; i++) {
+                const questionInput = tiles[i].getElementsByClassName("question-input")[0];
+                const answerInput = tiles[i].getElementsByClassName("answer-input")[0];
+
+                const question = questionInput.value.trim();
+                const answer = answerInput.value.trim();
+
+                if (question && answer) {
+                    gameData.push({ question, answer });
+                }
             }
 
-            const questionsArray = inputText.split("\n").map(item => {
-                const [question, answer] = item.split(" - ");
-                return { question: question.trim(), answer: answer.trim() };
-            });
-
-            gameData = questionsArray;
+            // Save the game data to localStorage
             localStorage.setItem('gameData', JSON.stringify(gameData));
             alert("Game saved successfully!");
-
-            document.getElementById("setup-section").style.display = "none";
-            document.getElementById("boardSection").style.display = "block";
-            loadBoard();
         }
 
         function loadBoard() {
             const gameBoard = document.getElementById("gameBoard");
             const tiles = gameBoard.getElementsByClassName("tile");
-            let questionIndex = 0;
-            
-            for (let i = 0; i < tiles.length; i++) {
-                if (questionIndex < gameData.length) {
-                    tiles[i].dataset.question = gameData[questionIndex].question;
-                    tiles[i].dataset.answer = gameData[questionIndex].answer;
-                    questionIndex++;
-                }
+
+            // Load the saved game data
+            for (let i = 0; i < gameData.length; i++) {
+                const questionInput = tiles[i].getElementsByClassName("question-input")[0];
+                const answerInput = tiles[i].getElementsByClassName("answer-input")[0];
+
+                questionInput.value = gameData[i].question;
+                answerInput.value = gameData[i].answer;
             }
         }
 
         function revealQuestion(tile) {
             currentTile = tile;
-            const question = tile.dataset.question;
+            const question = tile.querySelector('.question-input').value;
             document.getElementById("questionText").textContent = question;
             document.getElementById("questionScreen").style.display = "flex";
             document.getElementById("revealAnswerBtn").style.display = "inline-block";
         }
 
         function revealAnswer() {
-            const answer = currentTile.dataset.answer;
+            const answer = currentTile.querySelector('.answer-input').value;
             document.getElementById("answerText").textContent = answer;
             document.getElementById("answerText").style.display = "block";
         }
@@ -129,8 +147,6 @@
             const savedGame = localStorage.getItem('gameData');
             if (savedGame) {
                 gameData = JSON.parse(savedGame);
-                document.getElementById("setup-section").style.display = "none";
-                document.getElementById("boardSection").style.display = "block";
                 loadBoard();
             }
         };
