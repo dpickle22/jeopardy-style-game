@@ -1,28 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Jeopardy Game</title>
+    <title>Jeopardy Style Game</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        .board { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; max-width: 800px; margin: auto; }
-        .tile { width: 150px; height: 100px; background: blue; color: white; font-size: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 10px; }
-        .flipped { background: white; color: black; border: 2px solid black; }
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #000066; color: white; }
+        .board-container { max-width: 750px; margin: auto; }
+        .board { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
+        .category { font-size: 20px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
+        .tile { width: 140px; height: 100px; background: #0000FF; color: yellow; font-size: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold; border: 2px solid white; border-radius: 5px; }
+        .tile:hover { background: #3333FF; }
+        .question-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; color: white; display: flex; align-items: center; justify-content: center; font-size: 36px; text-align: center; }
+        .close-btn { position: absolute; top: 20px; right: 20px; background: red; color: white; padding: 10px; cursor: pointer; font-size: 20px; border: none; }
     </style>
 </head>
 <body>
     <h1>Jeopardy Game</h1>
-    <div class="board">
-        <div class="tile" onclick="flipTile(this, 'What is the Bible?')">$100</div>
-        <div class="tile" onclick="flipTile(this, 'Who was Moses?')">$200</div>
-        <div class="tile" onclick="flipTile(this, 'What is Genesis?')">$300</div>
-        <div class="tile" onclick="flipTile(this, 'Who is Jesus?')">$400</div>
-        <div class="tile" onclick="flipTile(this, 'What is the Resurrection?')">$500</div>
+    <div class="board-container">
+        <div class="board">
+            <div class="category">Bible Basics</div>
+            <div class="category">Old Testament</div>
+            <div class="category">New Testament</div>
+            <div class="category">Faith & Beliefs</div>
+            <div class="category">End Times</div>
+        </div>
+        <div class="board">
+            <div class="tile" onclick="showQuestion('What is the Bible?')">$100</div>
+            <div class="tile" onclick="showQuestion('Who was Moses?')">$200</div>
+            <div class="tile" onclick="showQuestion('What is Genesis?')">$300</div>
+            <div class="tile" onclick="showQuestion('Who is Jesus?')">$400</div>
+            <div class="tile" onclick="showQuestion('What is the Resurrection?')">$500</div>
+            <div class="tile" onclick="showQuestion('What is faith?')">$100</div>
+            <div class="tile" onclick="showQuestion('Who built the ark?')">$200</div>
+            <div class="tile" onclick="showQuestion('What is Exodus?')">$300</div>
+            <div class="tile" onclick="showQuestion('Who betrayed Jesus?')">$400</div>
+            <div class="tile" onclick="showQuestion('What is Pentecost?')">$500</div>
+            <div class="tile" onclick="showQuestion('What is prayer?')">$100</div>
+            <div class="tile" onclick="showQuestion('Who was the first king of Israel?')">$200</div>
+            <div class="tile" onclick="showQuestion('What is Leviticus?')">$300</div>
+            <div class="tile" onclick="showQuestion('Who was Paul?')">$400</div>
+            <div class="tile" onclick="showQuestion('What is the Holy Spirit?')">$500</div>
+            <div class="tile" onclick="showQuestion('What is grace?')">$100</div>
+            <div class="tile" onclick="showQuestion('Who led the Israelites into the Promised Land?')">$200</div>
+            <div class="tile" onclick="showQuestion('What is Numbers?')">$300</div>
+            <div class="tile" onclick="showQuestion('Who was John the Baptist?')">$400</div>
+            <div class="tile" onclick="showQuestion('What is the Second Coming?')">$500</div>
+            <div class="tile" onclick="showQuestion('What is sin?')">$100</div>
+            <div class="tile" onclick="showQuestion('Who was David?')">$200</div>
+            <div class="tile" onclick="showQuestion('What is Deuteronomy?')">$300</div>
+            <div class="tile" onclick="showQuestion('Who was Peter?')">$400</div>
+            <div class="tile" onclick="showQuestion('What is Revelation?')">$500</div>
+        </div>
+    </div>
+    <div class="question-screen" id="questionScreen">
+        <button class="close-btn" onclick="hideQuestion()">X</button>
+        <div id="questionText"></div>
     </div>
     <script>
-        function flipTile(tile, answer) {
-            tile.textContent = answer;
-            tile.classList.add('flipped');
-            tile.style.pointerEvents = 'none'; // Prevent clicking again
+        function showQuestion(question) {
+            document.getElementById("questionText").textContent = question;
+            document.getElementById("questionScreen").style.display = "flex";
+        }
+        function hideQuestion() {
+            document.getElementById("questionScreen").style.display = "none";
         }
     </script>
 </body>
