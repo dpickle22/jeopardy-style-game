@@ -6,63 +6,134 @@
         body { font-family: Arial, sans-serif; text-align: center; background-color: #000066; color: white; }
         .board-container { max-width: 750px; margin: auto; }
         .board { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
-        .category { font-size: 20px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
+        .category { font-size: 20px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; cursor: pointer; }
         .tile { width: 140px; height: 100px; background: #0000FF; color: yellow; font-size: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold; border: 2px solid white; border-radius: 5px; }
         .tile:hover { background: #3333FF; }
         .question-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; color: white; display: flex; align-items: center; justify-content: center; font-size: 36px; text-align: center; }
         .close-btn { position: absolute; top: 20px; right: 20px; background: red; color: white; padding: 10px; cursor: pointer; font-size: 20px; border: none; }
+        .answer-btn { margin-top: 20px; background: green; color: white; padding: 10px; cursor: pointer; border: none; }
     </style>
 </head>
 <body>
     <h1>Jeopardy Game</h1>
-    <div class="board-container">
-        <div class="board">
-            <div class="category">Bible Basics</div>
-            <div class="category">Old Testament</div>
-            <div class="category">New Testament</div>
-            <div class="category">Faith & Beliefs</div>
-            <div class="category">End Times</div>
+    <div id="setup-section">
+        <h2>Enter All Questions and Answers</h2>
+        <form id="questionForm">
+            <textarea id="questionsInput" rows="10" cols="50" placeholder="Enter questions and answers, separated by a new line (e.g., 'Question - Answer')"></textarea><br>
+            <button type="button" onclick="saveGame()">Save Game</button>
+        </form>
+    </div>
+    <div class="board-container" id="boardSection" style="display:none;">
+        <div class="board" id="gameBoard">
+            <div class="category" contenteditable="true">Bible Basics</div>
+            <div class="category" contenteditable="true">Old Testament</div>
+            <div class="category" contenteditable="true">New Testament</div>
+            <div class="category" contenteditable="true">Faith & Beliefs</div>
+            <div class="category" contenteditable="true">End Times</div>
         </div>
         <div class="board">
-            <div class="tile" onclick="showQuestion('What is the Bible?')">$100</div>
-            <div class="tile" onclick="showQuestion('Who was Moses?')">$200</div>
-            <div class="tile" onclick="showQuestion('What is Genesis?')">$300</div>
-            <div class="tile" onclick="showQuestion('Who is Jesus?')">$400</div>
-            <div class="tile" onclick="showQuestion('What is the Resurrection?')">$500</div>
-            <div class="tile" onclick="showQuestion('What is faith?')">$100</div>
-            <div class="tile" onclick="showQuestion('Who built the ark?')">$200</div>
-            <div class="tile" onclick="showQuestion('What is Exodus?')">$300</div>
-            <div class="tile" onclick="showQuestion('Who betrayed Jesus?')">$400</div>
-            <div class="tile" onclick="showQuestion('What is Pentecost?')">$500</div>
-            <div class="tile" onclick="showQuestion('What is prayer?')">$100</div>
-            <div class="tile" onclick="showQuestion('Who was the first king of Israel?')">$200</div>
-            <div class="tile" onclick="showQuestion('What is Leviticus?')">$300</div>
-            <div class="tile" onclick="showQuestion('Who was Paul?')">$400</div>
-            <div class="tile" onclick="showQuestion('What is the Holy Spirit?')">$500</div>
-            <div class="tile" onclick="showQuestion('What is grace?')">$100</div>
-            <div class="tile" onclick="showQuestion('Who led the Israelites into the Promised Land?')">$200</div>
-            <div class="tile" onclick="showQuestion('What is Numbers?')">$300</div>
-            <div class="tile" onclick="showQuestion('Who was John the Baptist?')">$400</div>
-            <div class="tile" onclick="showQuestion('What is the Second Coming?')">$500</div>
-            <div class="tile" onclick="showQuestion('What is sin?')">$100</div>
-            <div class="tile" onclick="showQuestion('Who was David?')">$200</div>
-            <div class="tile" onclick="showQuestion('What is Deuteronomy?')">$300</div>
-            <div class="tile" onclick="showQuestion('Who was Peter?')">$400</div>
-            <div class="tile" onclick="showQuestion('What is Revelation?')">$500</div>
+            <div class="tile" onclick="revealQuestion(this)">$100</div>
+            <div class="tile" onclick="revealQuestion(this)">$200</div>
+            <div class="tile" onclick="revealQuestion(this)">$300</div>
+            <div class="tile" onclick="revealQuestion(this)">$400</div>
+            <div class="tile" onclick="revealQuestion(this)">$500</div>
+            <div class="tile" onclick="revealQuestion(this)">$100</div>
+            <div class="tile" onclick="revealQuestion(this)">$200</div>
+            <div class="tile" onclick="revealQuestion(this)">$300</div>
+            <div class="tile" onclick="revealQuestion(this)">$400</div>
+            <div class="tile" onclick="revealQuestion(this)">$500</div>
+            <div class="tile" onclick="revealQuestion(this)">$100</div>
+            <div class="tile" onclick="revealQuestion(this)">$200</div>
+            <div class="tile" onclick="revealQuestion(this)">$300</div>
+            <div class="tile" onclick="revealQuestion(this)">$400</div>
+            <div class="tile" onclick="revealQuestion(this)">$500</div>
+            <div class="tile" onclick="revealQuestion(this)">$100</div>
+            <div class="tile" onclick="revealQuestion(this)">$200</div>
+            <div class="tile" onclick="revealQuestion(this)">$300</div>
+            <div class="tile" onclick="revealQuestion(this)">$400</div>
+            <div class="tile" onclick="revealQuestion(this)">$500</div>
+            <div class="tile" onclick="revealQuestion(this)">$100</div>
+            <div class="tile" onclick="revealQuestion(this)">$200</div>
+            <div class="tile" onclick="revealQuestion(this)">$300</div>
+            <div class="tile" onclick="revealQuestion(this)">$400</div>
+            <div class="tile" onclick="revealQuestion(this)">$500</div>
         </div>
     </div>
+
     <div class="question-screen" id="questionScreen">
         <button class="close-btn" onclick="hideQuestion()">X</button>
         <div id="questionText"></div>
+        <button id="revealAnswerBtn" class="answer-btn" style="display:none;" onclick="revealAnswer()">Reveal Answer</button>
+        <div id="answerText" style="display:none;"></div>
     </div>
+
     <script>
-        function showQuestion(question) {
+        let gameData = {};
+        let currentTile = null;
+
+        function saveGame() {
+            const inputText = document.getElementById("questionsInput").value.trim();
+            if (!inputText) {
+                alert("Please enter questions and answers.");
+                return;
+            }
+
+            const questionsArray = inputText.split("\n").map(item => {
+                const [question, answer] = item.split(" - ");
+                return { question: question.trim(), answer: answer.trim() };
+            });
+
+            gameData = questionsArray;
+            localStorage.setItem('gameData', JSON.stringify(gameData));
+            alert("Game saved successfully!");
+
+            document.getElementById("setup-section").style.display = "none";
+            document.getElementById("boardSection").style.display = "block";
+            loadBoard();
+        }
+
+        function loadBoard() {
+            const gameBoard = document.getElementById("gameBoard");
+            const tiles = gameBoard.getElementsByClassName("tile");
+            let questionIndex = 0;
+            
+            for (let i = 0; i < tiles.length; i++) {
+                if (questionIndex < gameData.length) {
+                    tiles[i].dataset.question = gameData[questionIndex].question;
+                    tiles[i].dataset.answer = gameData[questionIndex].answer;
+                    questionIndex++;
+                }
+            }
+        }
+
+        function revealQuestion(tile) {
+            currentTile = tile;
+            const question = tile.dataset.question;
             document.getElementById("questionText").textContent = question;
             document.getElementById("questionScreen").style.display = "flex";
+            document.getElementById("revealAnswerBtn").style.display = "inline-block";
         }
+
+        function revealAnswer() {
+            const answer = currentTile.dataset.answer;
+            document.getElementById("answerText").textContent = answer;
+            document.getElementById("answerText").style.display = "block";
+        }
+
         function hideQuestion() {
             document.getElementById("questionScreen").style.display = "none";
+            document.getElementById("answerText").style.display = "none";
         }
+
+        window.onload = function() {
+            const savedGame = localStorage.getItem('gameData');
+            if (savedGame) {
+                gameData = JSON.parse(savedGame);
+                document.getElementById("setup-section").style.display = "none";
+                document.getElementById("boardSection").style.display = "block";
+                loadBoard();
+            }
+        };
     </script>
 </body>
 </html>
